@@ -1,15 +1,15 @@
-Установка зависимостей:
-pip install -r requirements.txt
+## Установка зависимостей:
+<p>pip install -r requirements.txt</p>
 
-База Данных:
-PostgreSQL
-python3 manage.py loaddata women.json
+## База Данных:
+<p>PostgreSQL</p>
+<p>python3 manage.py loaddata women.json</p>
 
-Фото:
-https://drive.google.com/drive/folders/1B_aeqDkN9Szlj2jNSAxHfeeTbVlUde_W?usp=drive_link
+## Фото:
+<p><a href='https://drive.google.com/drive/folders/1B_aeqDkN9Szlj2jNSAxHfeeTbVlUde_W?usp=drive_link'> google docs</a></p>
 
-Миграции:
-python3 manage.py makemigrations
-python3 manage.py migrate
-
-python3 manage.py runserver
+## Миграции:
+<p>python3 manage.py makemigrations<br>
+python3 manage.py migrate<br>
+<br>
+python3 manage.py runserver</p>
