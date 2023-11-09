@@ -9,6 +9,7 @@ from women.views import page_not_found, index
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('women.urls')),
+    path('users/', include('users.urls', namespace='users'))    # users:login/logout - изоляция приложения, чтобы не путать другие login/logout
 ]
 
 if settings.DEBUG:

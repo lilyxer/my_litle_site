@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'women.apps.WomenConfig',   # apps.py -> class name
+    'users',
 ]
 
 if DEBUG:

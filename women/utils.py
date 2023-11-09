@@ -26,5 +26,5 @@ SITE_MENU = (
     {'name': 'О сайте', 'link': 'about'},
     {'name': 'Добавить статью', 'link': 'add_post'},
     {'name': 'Обратная связь', 'link': 'contact'},
-    {'name': 'Войти', 'link': 'login'},
+    {'name': 'Войти', 'link': 'users:login'},
 )
