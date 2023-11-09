@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class='post'>
+        <div class='post-content'>
+        <form action='' method='POST' enctype='multipart/form-data'>
+            {% csrf_token %}
+            <div class='form-error'>{{ form.non_field_errors }}</div>
+            {% for elem in form %}
+                <label class='form-label' for='{{ elem.id_for_label }}'>{{elem.label}}: </label>{{ elem }}</p>
+                <div class='form-error'>{{ felem.errors }}</div>
+            {% endfor %}
+            <!--{{ form.as_p }}as_p == <p>, as_ul == <ul>-->
+            <button class='form-button' type='submit'>Подтвердить</button>
+        </form>
+        </div>
+    </div>
+{% endblock content%}

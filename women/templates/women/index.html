@@ -1,0 +1,27 @@
+{% extends 'base.html' %} <!--Расширяем наш базовый шаблон-->
+
+{% block content %}
+
+        {% for model in object_list %}
+        {% comment %} {% if model.is_published %} берем на уровне ОРМ фильтр{% endcomment %}
+        <div class='post'>
+            {% if model.photo %}
+            <img class="img-thumb" src="{{model.photo.url}}">
+            {% endif %}
+            <div class='post-content'>
+                <h2 style='text-align: center'>{{ model.title }}</h2>
+                <p class="article-panel">
+                    Категория: {{model.cat.name}} | Дата: {{model.time_update|date:"d-m-Y H:i:s"}}
+                </p>
+                <p> {{ model.content|truncatewords:20|linebreaks }}</p>
+                {% comment %} <p class='link-read-post'><a href='{% url "post" model.slug  %}'>перейти к модели</a></p> {% endcomment %}
+                <p class='button'><a href='{{ model.get_absolute_url }}'>перейти к модели</a></p>
+                {% if not forloop.last %}<hr>{% endif %}</div>
+        </div>
+        
+        {% comment %} {% endif %} {% endcomment %}
+        {% endfor %}
+    </ul>
+    <p style='text-align: center'>{% include 'women/includes/pagi.html' %}</p>
+    {% include 'women/includes/nav.html' %} <!--подключение стороннего шаблона-->
+{% endblock content %}

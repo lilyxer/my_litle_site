@@ -1,0 +1,26 @@
+{% extends 'base.html' %} 
+{% block content %}
+    <div class='post'>
+        <div class='post-content'>
+        {% if post.photo %}
+            <img class="img-thumb" src="{{post.photo.url}}">
+        {% endif %}
+
+
+        <ul class='tags-list'>
+            <li>Теги:</li>
+            {% for tag in tags %}
+            <li><a href='{{tag.get_absolute_url}}'>{{ tag.title|capfirst }}</a></li>
+            {% endfor %}
+        </ul>
+
+        <h2 style='text-align: center'>{{ post.title }}</h2>
+
+        {{post.content|linebreaks}}
+
+        <a class='button' href='{% url "edit_page" post.slug %}'>Редактрирование</a><br>
+        <a class='button' href='{% url "delete_page" post.slug %}'>Удаление</a>
+
+        </div>
+    </div>
+{% endblock content %}

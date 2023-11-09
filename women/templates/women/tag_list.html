@@ -1,0 +1,11 @@
+    {% for tag in tags %}
+        {% if tag.id == tag_selected %}
+            <li class='menu-list-item selected'>{{ tag.title|capfirst }}</li>
+        {% else %}
+            <li class='menu-list-item'>
+                {% comment %} <a class='menu-link' href='{% url "category" cat.id %}'>{{ cat.civ }}</a> {% endcomment %}
+                <a class='menu-link' href='{{ tag.get_absolute_url }}'>{{ tag.title|capfirst }}</a>
+            </li>
+        {% endif %}
+    {% endfor%}
+
