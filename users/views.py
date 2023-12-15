@@ -14,7 +14,7 @@ def login_user(request):
             user = authenticate(request, username=data['login'],
                                 password=data['password'])
             if user and user.is_active:
-                login(request, user)
+                login(request, user) # авторизация!
                 return HttpResponseRedirect(reverse('home'))
 
     forms = LoginForm()

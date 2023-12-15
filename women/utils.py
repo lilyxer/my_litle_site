@@ -8,14 +8,15 @@ class DataMixin:
         if self.title_page:
             self.extra_context['title'] = self.title_page
  
-        if 'menu' not in self.extra_context:
-            self.extra_context['menu'] = SITE_MENU
+        # if 'menu' not in self.extra_context:
+        #     self.extra_context['menu'] = SITE_MENU
  
     def get_mixin_context(self, context, **kwargs):
         if self.title_page:
             context['title'] = self.title_page
  
-        context['menu'] = SITE_MENU
+        # context['menu'] = SITE_MENU  # добавили его впользовательский тег, 
+            # в идеале его грузить из БД, конктекстный процессор
         context['cat_selected'] = None
         context.update(kwargs)
         return context

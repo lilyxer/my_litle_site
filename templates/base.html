@@ -15,11 +15,20 @@
     <header class='welcome'>
         <div class='menu-content'>
             <ul class='menu-list'>
-                {% for elem in menu %}
+                {% for elem in mainmenu %}
                     <li class='menu-list-item'>
                         <a class='menu-link' href='{% url elem.link %}'>{{ elem.name }}</a>
                     </li>
                 {% endfor %}
+                {% if user.is_authenticated %}
+                    <li class='menu-list-item'>{{ user.username }} | 
+                    <a class='menu-link' href='{% url 'users:logout' %}'>Выйти</a></li>
+                {% else %}
+                <li class='menu-list-item'>
+                    <a class='menu-link' href='{% url 'users:login' %}'>Войти</a> | 
+                    <a class='menu-link' href='#'>Регистрация</a>
+                </li>
+                {% endif %}
             </ul>
         </div>
     <h1 class='head-title'>{{ title }}</h1>

@@ -1,8 +1,14 @@
 from django import template
 from women.models import Category, TagWomen
+# from women.utils import SITE_MENU
 
 register = template.Library()
 
+
+# тэг заменим контекстным пройессором
+# @register.simple_tag
+# def get_menu():
+#     return SITE_MENU
 
 @register.simple_tag
 def get_cat():
