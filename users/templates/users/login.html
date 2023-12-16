@@ -1,10 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class='post'>
+    <div class='post-content'>
     <h3>Авторизация</h3>
     <form method='POST'>
         {% csrf_token %}
-        {{ form.as_p }}
+        <div class='form-error'>{{ form.non_field_errors }}</div>
+        {% for elem in form %}
+            <label class='form-label' for='{{ elem.id_for_label }}'>{{elem.label}}: </label>{{ elem }}</p>
+            <div class='form-error'>{{ felem.errors }}</div>
+        {% endfor %}
+
         <button class='form-button' type='submit'>Войти</button>
     </form>
+    </div>
+</div>
 {% endblock content%}

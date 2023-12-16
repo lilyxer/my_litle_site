@@ -27,7 +27,7 @@ class OldIndex(generic.TemplateView):
     """базовый класс наследования"""
     template_name = 'women/index.html'
     extra_context = {
-        'menu': SITE_MENU,
+        # 'menu': SITE_MENU,
         # 'data': pages, 
         'cat_selected': 0,
         'title': 'Главная страница',
