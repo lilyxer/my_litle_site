@@ -2,7 +2,7 @@ from django.db import models
 from django.db.models.query import QuerySet
 from django.utils.text import slugify
 from django.urls import reverse
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
 """
 https://docs.djangoproject.com/en/4.2/topics/db/models/
@@ -47,8 +47,8 @@ class Women(models.Model):
     cat = models.ForeignKey('Category', on_delete=models.CASCADE, null=True, 
                             default=1, verbose_name='Категория', related_name='womens')
                             # related_name <==> cat_set
-    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1, 
-                             verbose_name='Пользователь')
+    author = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, default=1, 
+                             verbose_name='Пользователь', null=True, related_name='posts')
     tags = models.ManyToManyField('TagWomen', blank=True, related_name='womens')
     objects = models.Manager()      # если хотим оставить и основной менеджер и подключить кастомный
     published = MyManager()         # подключаем кастомный теперь можем обращаться Women.published.all()

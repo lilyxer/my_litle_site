@@ -14,11 +14,11 @@ class LoginUser(LoginView):
     template_name = 'users/login.html'
     extra_context = {'title': 'Авторизация'}
 
-    def get_success_url(self):
-        '''
-        перенаправление при успешной аутонтефикации
-        '''
-        return reverse_lazy('home')
+    # def get_success_url(self):
+    #     '''
+    #     перенаправление при успешной аутонтефикации
+    #     '''
+    #     return reverse_lazy('home')
 
 def login_user(request):
     """заменили классом LogoinView

@@ -11,7 +11,8 @@
             <div class='post-content'>
                 <h2 style='text-align: center'>{{ model.title }}</h2>
                 <p class="article-panel">
-                    Категория: {{model.cat.name}} | Дата: {{model.time_update|date:"d-m-Y H:i:s"}}
+                    Категория: {{model.cat.name}} | Дата: {{model.time_update|date:"d-m-Y H:i:s"}} |
+                     автор: {{ model.author|default:'unknown' }}
                 </p>
                 <p> {{ model.content|truncatewords:20|linebreaks }}</p>
                 {% comment %} <p class='link-read-post'><a href='{% url "post" model.slug  %}'>перейти к модели</a></p> {% endcomment %}

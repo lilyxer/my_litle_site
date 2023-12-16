@@ -140,7 +140,7 @@ MEDIA_URL = '/media/'  # /media/'           # префикс для ссылок
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'home'  # Стандартное перенаправление при успешной аутентефикации
 LOGOUT_REDIRECT_URL = 'home'  # Стандартное перенаправление при выходе
-
+LOGIN_URL = 'users:login'  # Стандартное перенаправление при неавторизованном запросе
 
 # Логирование 
 # LOGGING = {

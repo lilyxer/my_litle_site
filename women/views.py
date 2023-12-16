@@ -3,6 +3,8 @@ from django.http import HttpResponse, HttpRequest, HttpResponseNotFound
 from django.urls import reverse, reverse_lazy
 from django.core.paginator import Paginator
 from django.views import generic
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import *
 from .forms import *
@@ -55,7 +57,7 @@ class Index(DataMixin, generic.ListView):
 def about(request: HttpRequest):
     page = 'women/about.html'
     content = {
-        'menu': SITE_MENU,
+        # 'menu': SITE_MENU,
         'title': 'О сайте',
     }
     return render(request=request, template_name=page, context=content)
@@ -87,7 +89,7 @@ def add_post(request: HttpRequest):
     return render(request=request, template_name=page, context=content)
 
 
-class AddPost(DataMixin, generic.FormView):
+class AddPost(LoginRequiredMixin, DataMixin, generic.CreateView):
     """Для с формами возращает form
     если используем CreateView:
     form_class + fields <==> model
@@ -95,15 +97,18 @@ class AddPost(DataMixin, generic.FormView):
     """
     form_class = AddPostForm
     template_name = 'women/add_post.html'
-    success_url = reverse_lazy('home')   # отложенное формирование марщрута
+    # success_url = reverse_lazy('home')   # отложенное формирование марщрута
     title_page = 'Добавить пост'  # DataMixin
 
     def form_valid(self, form):
-        form.save()
+        """присваиваем автора поста 
+        """
+        elem = form.save(commit=False)
+        elem.author = self.request.user
         return super().form_valid(form)
 
 
-class UpdatePost(DataMixin, generic.UpdateView):
+class UpdatePost(LoginRequiredMixin, DataMixin, generic.UpdateView):
     model = Women
     fields = ['content', 'is_published', 'photo', 'cat', 'tags']
     template_name = 'women/add_post.html'
@@ -111,20 +116,21 @@ class UpdatePost(DataMixin, generic.UpdateView):
     title_page = 'Редактирование поста'  # DataMixin
 
 
-class DeletePost(DataMixin, generic.DeleteView):
+class DeletePost(LoginRequiredMixin, DataMixin, generic.DeleteView):
     model = Women
     template_name = 'women/del_post.html'
     success_url = reverse_lazy('home')
     title_page = 'Удаление поста'  # DataMixin
 
 
+@login_required
 def contact(request: HttpRequest):
     page = 'women/contact.html'
     content = {
-        'menu': SITE_MENU,
+        # 'menu': SITE_MENU,
         'title': 'Главная страница',
     }
-    return HttpResponse('страница с контсактами')
+    return HttpResponse('страница с контактами')
 
 
 def login(request: HttpRequest):
@@ -150,7 +156,7 @@ def post(request: HttpRequest, w_slug: str):
     return render(request=request, template_name=page, context=content)
 
 
-class Post(DataMixin, generic.DetailView):
+class Post(LoginRequiredMixin, DataMixin, generic.DetailView):
     """Для выбора экземпляра по пк или слаг возращает object"""
     # model = Women
     template_name = 'women/post.html'
