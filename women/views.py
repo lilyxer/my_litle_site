@@ -90,14 +90,11 @@ def add_post(request: HttpRequest):
 
 
 class AddPost(LoginRequiredMixin, DataMixin, generic.CreateView):
-    """Для с формами возращает form
-    если используем CreateView:
-    form_class + fields <==> model
-    - form_valid
+    """Для работы формами возращает form
+        присваиваем авторство 
     """
     form_class = AddPostForm
     template_name = 'women/add_post.html'
-    # success_url = reverse_lazy('home')   # отложенное формирование марщрута
     title_page = 'Добавить пост'  # DataMixin
 
     def form_valid(self, form):
@@ -123,7 +120,7 @@ class DeletePost(LoginRequiredMixin, DataMixin, generic.DeleteView):
     title_page = 'Удаление поста'  # DataMixin
 
 
-@login_required
+@login_required()
 def contact(request: HttpRequest):
     page = 'women/contact.html'
     content = {

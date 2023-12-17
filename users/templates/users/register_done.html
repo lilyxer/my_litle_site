@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>добро пожаловать</h3>
+
+<p>Вы успешно зарегались. Для входа перейдите по 
+    <a href='{% url 'users:login' %}'>ссылке</a></p>
+
+{% endblock content %}
