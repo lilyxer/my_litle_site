@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
-
 {% block content %}
 <div class='post'>
     <div class='post-content'>
-    <h3>Авторизация</h3>
     <form method='POST'>
         {% csrf_token %}
         <input type="hidden" name="next" value="{{ next }}" /> <!--понадобится для переброса-->
@@ -12,7 +10,6 @@
             <label class='form-label' for='{{ elem.id_for_label }}'>{{elem.label}}: </label>{{ elem }}</p>
             <div class='form-error'>{{ elem.errors }}</div>
         {% endfor %}
-
         <button class='form-button' type='submit'>Войти</button>
     </form>
     </div>
