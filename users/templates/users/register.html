@@ -6,8 +6,12 @@
     <form method='post'>
         {% csrf_token %}
         <input type='hidden' name='text' value='{{ next }}' />
-        {{ form.as_p }}
-        <button class='form-button' type='submit'>Войти</button>
+        <div class='form-error'>{{ form.non_field_errors }}</div>
+        {% for elem in form %}
+            <label class='form-label' for='{{ elem.id_for_label }}'>{{elem.label}}: </label>{{ elem }}</p>
+            <div class='form-error'>{{ felem.errors }}</div>
+        {% endfor %}
+        <button class='form-button' type='submit'>Регистрация</button>
     </form>
     </div>
 </div>

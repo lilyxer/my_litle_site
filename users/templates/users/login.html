@@ -6,6 +6,7 @@
     <h3>Авторизация</h3>
     <form method='POST'>
         {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}" /> <!--понадобится для переброса-->
         <div class='form-error'>{{ form.non_field_errors }}</div>
         {% for elem in form %}
             <label class='form-label' for='{{ elem.id_for_label }}'>{{elem.label}}: </label>{{ elem }}</p>

@@ -21,6 +21,13 @@ class LoginUser(LoginView):
     #     return reverse_lazy('home')
 
 
+class RegisterUser(generic.CreateView):
+    form_class = RegisterUserForm
+    template_name = 'users/register.html'
+    extra_context = {'title': "Регистрация"}
+    success_url = reverse_lazy('users:login')
+
+
 def register(request):
     if request.method == 'POST':
         form = RegisterUserForm(request.POST)
