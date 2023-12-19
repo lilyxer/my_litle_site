@@ -10,7 +10,7 @@
         <div class='form-error'>{{ form.non_field_errors }}</div>
         {% for elem in form %}
             <label class='form-label' for='{{ elem.id_for_label }}'>{{elem.label}}: </label>{{ elem }}</p>
-            <div class='form-error'>{{ felem.errors }}</div>
+            <div class='form-error'>{{ elem.errors }}</div>
         {% endfor %}
 
         <button class='form-button' type='submit'>Войти</button>
