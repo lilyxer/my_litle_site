@@ -124,7 +124,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
@@ -141,6 +140,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'home'  # Стандартное перенаправление при успешной аутентефикации
 LOGOUT_REDIRECT_URL = 'home'  # Стандартное перенаправление при выходе
 LOGIN_URL = 'users:login'  # Стандартное перенаправление при неавторизованном запросе
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend', # стандартная реализация аутентификации по логин/паролю
+    'users.authentication.EmailAuthBackend', # самописный бекенд с реализацией через email
+]
 
 # Логирование 
 # LOGGING = {

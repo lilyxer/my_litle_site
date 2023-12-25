@@ -1,8 +1,11 @@
+from django.db.models.base import Model as Model
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import LoginView
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 from django.urls import reverse, reverse_lazy
 
@@ -27,6 +30,18 @@ class RegisterUser(generic.CreateView):
     extra_context = {'title': "Регистрация"}
     success_url = reverse_lazy('users:login')
 
+
+class ProfileUser(LoginRequiredMixin, generic.UpdateView):
+    model = get_user_model()
+    form_class = ProfileUserForm
+    template_name = 'users/profile.html'
+    extra_context = {'title': 'Профиль'}
+
+    def get_success_url(self):
+        return reverse_lazy('users:profile', args=[self.request.user.pk])
+    
+    def get_object(self, queryset=None):
+        return self.request.user
 
 def register(request):
     if request.method == 'POST':
