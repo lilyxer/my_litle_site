@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
@@ -42,6 +42,14 @@ class ProfileUser(LoginRequiredMixin, generic.UpdateView):
     
     def get_object(self, queryset=None):
         return self.request.user
+    
+
+class UserPasswordChange(PasswordChangeView):
+    form_class = UserPasswordChangeForm
+    success_url = reverse_lazy('users:change_password_done')
+    template_name = 'users/change_password.html'
+    extra_context = {'title': 'Изменение пароля'}
+
 
 def register(request):
     if request.method == 'POST':
